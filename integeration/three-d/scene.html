@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家乡三维地图——美丽锡都个旧</title>
+    <link rel="stylesheet" href="../libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .scene-wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+      #scene { height: 65vh; min-height: 420px; border-radius: 12px; overflow: hidden; border: 2px solid var(--border-card); }
+      .scene-legend { display: flex; gap: 16px; justify-content: center; margin: 12px 0 0; font-size: .9rem; }
+      .scene-legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+      .legend-lake::before { background: #4bbce9; }
+      .legend-hill::before { background: #7cae6f; }
+      .legend-city::before { background: #9aa8b2; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="logo" href="../data/index.html">美丽锡都 · 个旧</a>
+            <nav class="main-nav">
+                <a href="../data/index.html">返回首页</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="section">
+            <h2>家乡三维地图</h2>
+            <div class="scene-wrap">
+                <div id="scene"></div>
+                <p class="scene-legend">
+                    <span class="legend-lake">金湖</span>
+                    <span class="legend-hill">老阴山 / 老阳山</span>
+                    <span class="legend-city">锡都城区</span>
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <p>美丽锡都 · 家乡个旧 —— 简单三维图</p>
+    </footer>
+    <script src="../libs/three.min.js"></script>
+    <script src="../libs/OrbitControls.js"></script>
+    <script>
+      const box = document.querySelector('#scene');
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color('#eaf6fd');
+
+      const camera = new THREE.PerspectiveCamera(45, box.clientWidth / box.clientHeight, 0.1, 1000);
+      camera.position.set(28, 22, 30);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(box.clientWidth, box.clientHeight);
+      box.appendChild(renderer.domElement);
+
+      // 灯光
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+      const sun = new THREE.DirectionalLight(0xffffff, 0.7);
+      sun.position.set(20, 30, 10);
+      scene.add(sun);
+
+      // 地面
+      const ground = new THREE.Mesh(
+        new THREE.BoxGeometry(60, 1, 60),
+        new THREE.MeshLambertMaterial({ color: '#cfe6c0' })
+      );
+      ground.position.y = -0.5;
+      scene.add(ground);
+
+      const lake = new THREE.Mesh(
+        new THREE.CylinderGeometry(7, 7, 0.4, 40),
+        new THREE.MeshLambertMaterial({ color: '#4bbce9' })
+      );
+      lake.position.set(0, 0.21, 0);
+      scene.add(lake);
+
+      const hillMat = new THREE.MeshLambertMaterial({ color: '#7cae6f' });
+      const yin = new THREE.Mesh(new THREE.ConeGeometry(9, 14, 32), hillMat);
+      yin.position.set(0, 7, -20);
+      scene.add(yin);
+      const yang = new THREE.Mesh(new THREE.ConeGeometry(7, 10, 32), hillMat);
+      yang.position.set(4, 5, 20);
+      scene.add(yang);
+
+      const cityMat = new THREE.MeshLambertMaterial({ color: '#9aa8b2' });
+      [
+        [-12, 3, -8, 3], [12, 4, -6, 3], [-14, 2, 6, 2.5],
+        [14, 2.4, 8, 2.5], [-6, 5, -14, 3], [7, 2, 13, 2]
+      ].forEach(([x, h, z, w]) => {
+        const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), cityMat);
+        b.position.set(x, h / 2, z);
+        scene.add(b);
+      });
+
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 2, 0);
+      controls.update();
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      };
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = box.clientWidth / box.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(box.clientWidth, box.clientHeight);
+      });
+    </script>
+</body>
+</html>

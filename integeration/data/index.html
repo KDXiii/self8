@@ -14,7 +14,7 @@
             <nav class="main-nav">
                 <a href="#home page">首页</a>
                 <a href="#data">数据统计</a>
-                <a href="#three-d">家乡三维</a>
+                <a href="../three-d/scene.html">家乡三维</a>
                 <a href="#hometown">锡都生活</a>
                 <a href="#about">关于个旧</a>
                 <a href="#guide">旅游攻略</a>
@@ -30,12 +30,32 @@
           <div class="card mb-3">
             <div class="card-body">
               <h3 class="h5 text-center">景区（点）人气一览</h3>
+              <div class="row g-2 mb-3">
+                <div class="col-auto">
+                  <label for="category-filter" class="form-label">分类</label>
+                  <select id="category-filter" class="form-select">
+                    <option value="all">全部</option>
+                    <option value="亲子游乐">亲子游乐</option>
+                    <option value="自然风光">自然风光</option>
+                    <option value="休闲观光">休闲观光</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <label for="visitors-filter" class="form-label">接待游客</label>
+                  <select id="visitors-filter" class="form-select">
+                    <option value="all">全部</option>
+                    <option value="high">1万人次及以上</option>
+                    <option value="low">1万人次以下</option>
+                  </select>
+                </div>
+              </div>
               <div class="table-responsive">
                 <table class="table align-middle text-center mb-0">
                   <thead>
                     <tr>
                       <th>排名</th>
                       <th>景点名称</th>
+                      <th>分类</th>
                       <th>接待游客（万人次）</th>
                     </tr>
                   </thead>
@@ -68,7 +88,8 @@
   <article class="hometown-card card">
     <img src="../images/scenery.jpg" alt="锡都美景">
     <h3>锡都美景</h3>
-    <p>两山环一水，滋养锡都人。</p>
+    <p>阴阳两山面对面，两山环一水，滋养锡都人。</p>
+
   </article>
   <article class="hometown-card card">
     <img src="../images/lantern.jpg" alt="节日龙灯">
