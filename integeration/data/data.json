@@ -1,0 +1,49 @@
+{
+  "title": "景区（点）人气一览",
+  "summary": {
+    "period": "春节7天",
+    "city": "个旧市",
+    "spotCount": 6,
+    "totalVisitors": 11.09,
+    "unit": "万人次",
+    "text": "春节7天，个旧市6个景区景点，共接待游客约11.09万人次。"
+  },
+  "spots": [
+    {
+      "rank": 1,
+      "name": "个旧动物园",
+      "visitors": 3.47,
+      "unit": "万人次"
+    },
+    {
+      "rank": 2,
+      "name": "启园",
+      "visitors": 3.08,
+      "unit": "万人次"
+    },
+    {
+      "rank": 3,
+      "name": "宝华欢乐世界游乐园",
+      "visitors": 1.88,
+      "unit": "万人次"
+    },
+    {
+      "rank": 4,
+      "name": "玻璃栈道",
+      "visitors": 1.51,
+      "unit": "万人次"
+    },
+    {
+      "rank": 5,
+      "name": "乍甸乳业片区",
+      "visitors": 0.76,
+      "unit": "万人次"
+    },
+    {
+      "rank": 6,
+      "name": "丫沙底瀑布温泉",
+      "visitors": 0.39,
+      "unit": "万人次"
+    }
+  ]
+}
